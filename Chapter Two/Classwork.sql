@@ -40,7 +40,7 @@ order by WarehouseID desc, SKU asc;
 
 -- 2.27
 select SKU, SKU_Description, WarehouseID from cape_codd.INVENTORY
-where QuantityOnHand = 0 and QuantityOnOrder = 0
+where QuantityOnHand = 0 and QuantityOnOrder > 0
 order by WarehouseID desc, SKU asc;
 
 -- 2.28
@@ -81,7 +81,7 @@ FROM cape_codd.INVENTORY;
 select WarehouseID, sum(QuantityOnHand) as Total_Items_On_Hand
 from cape_codd.INVENTORY
 group by WarehouseID
-order by Total_Items_On_Hand asc ;
+order by Total_Items_On_Hand desc;
 
 -- 2.37
 select WarehouseID, sum(QuantityOnHand) as Total_Items_On_Hand_LT3
@@ -94,7 +94,7 @@ order by Total_Items_On_Hand_LT3 desc;
 select WarehouseID, sum(QuantityOnHand) as Total_Items_On_Hand_LT3
 from cape_codd.INVENTORY
 where QuantityOnHand < 3
-group by WarehouseID, QuantityOnHand
+group by WarehouseID
 Having Count(*) < 2
 order by Total_Items_On_Hand_LT3 desc;
 
